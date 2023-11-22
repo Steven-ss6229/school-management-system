@@ -12,7 +12,7 @@ router.post("/getDetails", async (req, res) => {
     }
     const data = {
       success: true,
-      message: "Faculty Details Found!",
+      message: "",
       user,
     };
     res.json(data);
@@ -61,24 +61,36 @@ router.post("/updateDetails/:id", async (req, res) => {
   }
 });
 
-router.delete("/deleteDetails/:id", async (req, res) => {
+router.delete("/deleteDetails", async (req, res) => {
   try {
-    let user = await facultyDetails.findByIdAndDelete(req.params.id);
+    const { employeeId } = req.body;
+
+    // Check if faculty with the given employeeId exists
+    const user = await facultyDetails.findOne({ employeeId });
+
     if (!user) {
-      return res.status(400).json({
+      return res.status(404).json({
         success: false,
-        message: "No Faculty Found",
+        message: "Faculty not found with the provided EmployeeId",
       });
     }
+
+    // Delete faculty details
+    await facultyDetails.deleteOne({ employeeId });
+
+    // Delete faculty authentication credentials
+    await facultyAuth.deleteOne({ loginid: employeeId });
+
     const data = {
       success: true,
-      message: "Deleted Successfull!",
+      message: "Faculty Details and Credentials Deleted!",
     };
     res.json(data);
   } catch (error) {
-    res.status(500).json({ success: false, message: "Internal Server Error" });
+    res.status(500).json({ success: false, message: "deleted" });
   }
 });
+
 
 router.get("/count", async (req, res) => {
   try {
@@ -95,5 +107,7 @@ router.get("/count", async (req, res) => {
       .json({ success: false, message: "Internal Server Error", error });
   }
 });
+
+
 
 module.exports = router;

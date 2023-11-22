@@ -64,19 +64,26 @@ router.post("/updateDetails/:id", async (req, res) => {
   }
 });
 
-router.delete("/deleteDetails/:id", async (req, res) => {
-  let { id } = req.body;
+router.delete("/deleteDetails", async (req, res) => {
   try {
-    let user = await studentDetails.findByIdAndDelete(req.params.id);
+    const { enrollmentNo } = req.body;
+
+    // Check if student with the given enrollmentNo exists
+    const user = await studentDetails.findOne({ enrollmentNo });
+
     if (!user) {
-      return res.status(400).json({
+      return res.status(404).json({
         success: false,
-        message: "No Student Found",
+        message: "Student not found with the provided Enrollment No",
       });
     }
+
+    // Delete student details
+    await studentDetails.deleteOne({ enrollmentNo });
+
     const data = {
       success: true,
-      message: "Deleted Successfull!",
+      message: "Student Details Deleted!",
     };
     res.json(data);
   } catch (error) {

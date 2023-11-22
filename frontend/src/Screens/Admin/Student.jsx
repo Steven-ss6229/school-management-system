@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Heading from "../../components/Heading";
 import AddStudent from "./Student/AddStudent";
 import EditStudent from "./Student/EditStudent";
+import DeleteStudent from "./Student/DeleteStudent";
+
 const Student = () => {
   const [selected, setSelected] = useState("add");
   return (
@@ -25,10 +27,19 @@ const Student = () => {
           >
             Edit Student
           </button>
+          <button
+            className={`${
+              selected === "delete" && "border-b-2 "
+            }border-blue-500 px-4 py-2 text-black rounded-sm`}
+            onClick={() => setSelected("delete")}
+          >
+            delete Student
+          </button>
         </div>
       </div>
       {selected === "add" && <AddStudent />}
       {selected === "edit" && <EditStudent />}
+      {selected === "delete" && <DeleteStudent/>}
     </div>
   );
 };

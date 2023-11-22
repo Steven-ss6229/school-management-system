@@ -2,9 +2,12 @@ import React, { useState } from "react";
 import Heading from "../../components/Heading";
 import EditFaculty from "./Faculty/EditFaculty";
 import AddFaculty from "./Faculty/AddFaculty";
+import DeleteFaculty from "./Faculty/DeleteFaculty";
 
 const Faculty = () => {
   const [selected, setSelected] = useState("add");
+
+  console.log("abcd",selected);
 
   return (
     <div className="w-[85%] mx-auto mt-10 flex justify-center items-start flex-col mb-10">
@@ -27,10 +30,19 @@ const Faculty = () => {
           >
             Edit Faculty
           </button>
+          <button
+            className={`${
+              selected === "delete" && "border-b-2 "
+            }border-blue-500 px-4 py-2 text-black rounded-sm`}
+            onClick={() => setSelected("delete")}
+          >
+            delete Faculty
+          </button>
         </div>
       </div>
       {selected === "add" && <AddFaculty />}
       {selected === "edit" && <EditFaculty />}
+      {selected === "delete" && <DeleteFaculty/>}
     </div>
   );
 };

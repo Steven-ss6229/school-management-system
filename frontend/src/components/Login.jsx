@@ -35,7 +35,7 @@ const Login = () => {
     <div className="bg-white h-[100vh] w-full flex justify-between items-center">
       <img
         className="w-[60%] h-[100vh] object-cover"
-        src="https://images.unsplash.com/photo-1527891751199-7225231a68dd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+        src="https://res.cloudinary.com/doqwjh6dk/image/upload/v1699337072/352551025_828041858184560_7030647301731331903_n_wym6cg.jpg"
         alt=""
       />
       <div className="w-[40%] flex justify-center items-start flex-col pl-8">
