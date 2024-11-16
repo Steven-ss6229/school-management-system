@@ -5,7 +5,7 @@ The College Management System is a MERN Stack-based system with three different 
 
 ## Tech Stack
 
-**Client:** React, Redux, TailwindCSS
+**Client:** React, Redux, CSS
 
 **Server:** Node, Express
 
